@@ -105,7 +105,7 @@ public class MaestroServiceImpl implements MaestroService {
 
         log.info("Validando teléfono único...");
 
-        if(maestroRepository.existsByEmailIgnoreCase(request.telefono().trim()))
+        if(maestroRepository.existsByTelefono(request.telefono().trim()))
             throw new IllegalArgumentException("Ya existe un maestro registrado con el teléfono: " + request.telefono());
     }
 
@@ -117,7 +117,7 @@ public class MaestroServiceImpl implements MaestroService {
 
         log.info("Validando cambio en teléfono único...");
 
-        if(maestroRepository.existsByEmailIgnoreCaseAndIdNot(request.telefono().trim(), id))
+        if(maestroRepository.existsByTelefonoAndIdNot(request.telefono().trim(), id))
             throw new IllegalArgumentException("Ya existe un maestro registrado con el teléfono: " + request.telefono());
     }
 }
