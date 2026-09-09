@@ -29,6 +29,6 @@ public class Horario {
     @Column(name = "HORA_INICIO", length = 5, nullable = false)
     private String horaInicio;
 
-    @Column(name = "HORA_FI3N", length = 5, nullable = false)
+    @Column(name = "HORA_FIN", length = 5, nullable = false)
     private String horaFin;
 }

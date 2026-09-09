@@ -1,5 +1,7 @@
 package com.dan.escuela.entities;
 
+import com.dan.escuela.utils.StringCustomUtils;
+import com.dan.escuela.utils.ValoresNumericosUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,4 +27,22 @@ public class Aula {
 
     @Column(name = "CAPACIDAD", nullable = false)
     private Integer capacidad;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "aula", fetch = FetchType.LAZY)
+    private List<Grupo> grupos = new ArrayList<>();
+
+    public void validarDatos(String nombre, Integer capacidad) {
+        StringCustomUtils.validarTamanio(nombre, 1, 100, "El nombre es requerido y debe tener entre 1 y 100 caracteres");
+
+        ValoresNumericosUtils.validarEnteroPositivo(capacidad, "La capacidad deben ser mayor a 0");
+    }
+
+    public void actualizar(String nombre, Integer capacidad) {
+        validarDatos(nombre, capacidad);
+
+        this.nombre = nombre.trim();
+        this.capacidad = capacidad;
+    }
+
 }
