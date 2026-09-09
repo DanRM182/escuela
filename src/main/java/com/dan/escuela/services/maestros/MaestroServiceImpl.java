@@ -36,6 +36,7 @@ public class MaestroServiceImpl implements MaestroService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MaestroResponse obtenerPorId(Long id) {
         log.info("Buscando maestro por ID");
 
@@ -83,7 +84,7 @@ public class MaestroServiceImpl implements MaestroService {
 
         log.info("Eliminando maestro con id: {}", id);
 
-        if(!grupoRepository.existsByMaestroId(id))
+        if(grupoRepository.existsByMaestroId(id))
             throw new EntidadRelacionadaException(
                     "No se puede eliminar el maestro ya que tiene grupos asignados");
 
