@@ -53,6 +53,10 @@ public class Maestro {
         StringCustomUtils.validarTamanio(telefono, 10, 10, "El telefono es requerido y debe tener 10 dígitos");
     }
 
+    public String obtenerNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) {
+        return String.join( " ",nombre,apellidoPaterno, apellidoMaterno);
+    }
+
     public void actualizar(String nombre, String apellidoPaterno, String apellidoMaterno, String email, String telefono) {
         validarDatos(nombre, apellidoPaterno, apellidoMaterno, email, telefono);
 

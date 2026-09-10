@@ -16,13 +16,12 @@ import java.util.List;
 public class AlumnoMapper implements CommonMapper<AlumnoRequest, AlumnoResponse, Alumno> {
     @Override
     public Alumno requestAEntidad(AlumnoRequest request) {
-        if(request == null) return null;
-
-        return Alumno.builder()
-                .nombre(request.nombre().trim())
-                .apellidoPaterno(request.apellidoPaterno().trim())
-                .apellidoMaterno(request.apellidoMaterno().trim())
-                .build();
+        return request != null ?
+                Alumno.builder()
+                    .nombre(request.nombre().trim())
+                    .apellidoPaterno(request.apellidoPaterno().trim())
+                    .apellidoMaterno(request.apellidoMaterno().trim())
+                    .build() : null;
     }
 
     public Alumno requestAEntidad(AlumnoRequest request, String email, String matricula) {
@@ -43,7 +42,7 @@ public class AlumnoMapper implements CommonMapper<AlumnoRequest, AlumnoResponse,
 
         return new AlumnoResponse(
                 entidad.getId(),
-                String.join(" ",
+                entidad.obtenerNombreCompleto(
                         entidad.getNombre(),
                         entidad.getApellidoPaterno(),
                         entidad.getApellidoMaterno()),

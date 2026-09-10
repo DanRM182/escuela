@@ -84,7 +84,7 @@ public class GrupoServiceImpl implements GrupoService {
 
         grupo.actualizar(curso, maestro, aula, request.periodo());
 
-        log.info("Grupo con ID {} actualizado correctgamente", grupo.getId());
+        log.info("Grupo con ID {} actualizado correctamente", grupo.getId());
 
         return grupoMapper.entidadAResponse(grupo);
     }
