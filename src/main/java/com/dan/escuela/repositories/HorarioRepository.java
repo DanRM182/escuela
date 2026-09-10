@@ -1,12 +1,10 @@
 package com.dan.escuela.repositories;
 
-import com.dan.escuela.entities.Inscripcion;
+import com.dan.escuela.entities.Horario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> {
-    boolean existsByAlumnoId(Long idAlumno);
-
+public interface HorarioRepository extends JpaRepository<Horario, Long> {
     boolean existsByGrupoId(Long grupoId);
 }

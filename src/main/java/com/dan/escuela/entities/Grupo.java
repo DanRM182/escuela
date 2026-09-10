@@ -1,10 +1,14 @@
 package com.dan.escuela.entities;
 
+import com.dan.escuela.utils.StringCustomUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "GRUPOS", uniqueConstraints = @UniqueConstraint(
@@ -34,4 +38,27 @@ public class Grupo {
 
     @Column(name = "PERIODO", length = 20, nullable = false)
     private String periodo;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY)
+    private List<Horario> horarios = new ArrayList<>();
+
+    public void asignarDatosOtrasEntidades(Curso curso, Maestro maestro, Aula aula) {
+        this.curso = curso;
+        this.maestro = maestro;
+        this.aula = aula;
+    }
+
+    private void validarPeriodo(String periodo) {
+        StringCustomUtils.validarTamanio(periodo, 1, 20, "El periodo es requerido y debe tener entre 1 y 20 caracteres");
+    }
+
+    public void actualizar(Curso curso, Maestro maestro, Aula aula, String periodo) {
+        validarPeriodo(periodo);
+
+        this.curso = curso;
+        this.maestro = maestro;
+        this.aula = aula;
+        this.periodo = periodo.trim();
+    }
 }

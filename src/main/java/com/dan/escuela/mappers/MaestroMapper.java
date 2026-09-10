@@ -1,6 +1,7 @@
 package com.dan.escuela.mappers;
 
 import com.dan.escuela.dto.datos.DatosCurso;
+import com.dan.escuela.dto.datos.DatosMaestro;
 import com.dan.escuela.dto.maestros.MaestroRequest;
 import com.dan.escuela.dto.maestros.MaestroResponse;
 import com.dan.escuela.entities.Grupo;
@@ -36,7 +37,8 @@ public class MaestroMapper implements CommonMapper<MaestroRequest, MaestroRespon
 
         return new MaestroResponse(
                 entidad.getId(),
-                String.join(entidad.getNombre(), entidad.getApellidoPaterno(), entidad.getApellidoMaterno()),
+                String.join(entidad.getNombre(), " ",
+                        entidad.getApellidoPaterno(), " ", entidad.getApellidoMaterno()),
                 entidad.getEmail(),
                 entidad.getTelefono(),
                 cursos);
@@ -48,5 +50,14 @@ public class MaestroMapper implements CommonMapper<MaestroRequest, MaestroRespon
         return entidad.getGrupos().stream()
                 .map(Grupo::getCurso)
                 .map(cursoMapper::entidadADatosCurso).toList();
+    }
+
+    public DatosMaestro entidadADatosMaestro(Maestro entidad) {
+        if(entidad == null) return null;
+
+        return new DatosMaestro(
+                String.join(" ",entidad.getNombre(), entidad.getApellidoPaterno(), entidad.getApellidoMaterno()),
+                entidad.getEmail(),
+                entidad.getTelefono());
     }
 }
