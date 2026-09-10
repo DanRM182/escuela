@@ -2,7 +2,6 @@ package com.dan.escuela.dto.grupos;
 
 import com.dan.escuela.dto.datos.DatosAula;
 import com.dan.escuela.dto.datos.DatosCurso;
-import com.dan.escuela.dto.datos.DatosHorario;
 import com.dan.escuela.dto.datos.DatosMaestro;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -23,7 +22,7 @@ public record GrupoResponse(
         DatosAula aula,
 
         @Schema(description = "Datos de los horarios del grupo")
-        List<DatosHorario> horarios,
+        List<String> horarios,
 
         @Schema(description = "Periodo del grupo")
         String periodo

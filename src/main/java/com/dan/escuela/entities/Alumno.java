@@ -56,6 +56,10 @@ public class Alumno {
         StringCustomUtils.validarTamanio(apellidoMaterno, 1, 50, "El apellido materno es requerido y debe tener entre 1 y 50 caracteres");
    }
 
+    public String obtenerNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) {
+        return String.join( " ",nombre,apellidoPaterno, apellidoMaterno);
+    }
+
     public boolean cambioEnDatos(String nombre, String apellidoPaterno, String apellidoMaterno) {
         return !this.nombre.equals(nombre) || !this.apellidoPaterno.equals(apellidoPaterno) || !this.apellidoMaterno.equals(apellidoMaterno);
     }

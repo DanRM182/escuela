@@ -1,9 +1,6 @@
 package com.dan.escuela.mappers;
 
-import com.dan.escuela.dto.datos.DatosAula;
-import com.dan.escuela.dto.datos.DatosCurso;
-import com.dan.escuela.dto.datos.DatosHorario;
-import com.dan.escuela.dto.datos.DatosMaestro;
+import com.dan.escuela.dto.datos.*;
 import com.dan.escuela.dto.grupos.GrupoRequest;
 import com.dan.escuela.dto.grupos.GrupoResponse;
 import com.dan.escuela.entities.*;
@@ -19,13 +16,11 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
     private final CursoMapper cursoMapper;
     private final MaestroMapper maestroMapper;
     private final AulaMapper aulaMapper;
-    private final HorarioMapper horarioMapper;
 
     @Override
     public Grupo requestAEntidad(GrupoRequest request) {
-        if(request == null) return null;
-
-        return Grupo.builder().periodo(request.periodo()).build();
+        return request != null ?
+                Grupo.builder().periodo(request.periodo()).build() : null;
     }
 
     public Grupo requestAEntidad(GrupoRequest request, Curso curso, Maestro maestro, Aula aula) {
@@ -49,7 +44,7 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
 
         DatosAula aula = MapperUtils.entidadAObjetoDato(entidad, Grupo::getAula, aulaMapper::entidadADatosAula);
 
-        List<DatosHorario> horarios = entidadADatosHorario(entidad);
+        List<String> horarios = entidadADatosHorario(entidad);
 
         return new GrupoResponse(
                 entidad.getId(),
@@ -61,8 +56,9 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
         );
     }
 
-    private List<DatosHorario> entidadADatosHorario(Grupo entidad) {
+    private List<String> entidadADatosHorario(Grupo entidad) {
         return entidad != null ? entidad.getHorarios().stream().
-                map(horarioMapper::entidadADatosHorario).toList() : List.of();
+                map(MapperUtils::entidadADatosHorario).toList() : List.of();
     }
+
 }
