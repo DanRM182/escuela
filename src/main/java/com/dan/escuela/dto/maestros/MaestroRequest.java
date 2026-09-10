@@ -31,5 +31,4 @@ public record MaestroRequest(
         @Pattern(regexp = "^[0-9]{10}", message = "El teléfono debe tener 10 dígitos")
         @Schema(description = "Teléfono del maestro", example = "5512345678")
         String telefono
-) {
-}
+) { }

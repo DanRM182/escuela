@@ -2,6 +2,7 @@ package com.dan.escuela.mappers;
 
 import com.dan.escuela.dto.aulas.AulaRequest;
 import com.dan.escuela.dto.aulas.AulaResponse;
+import com.dan.escuela.dto.datos.DatosAula;
 import com.dan.escuela.entities.Aula;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,14 @@ public class AulaMapper implements CommonMapper<AulaRequest, AulaResponse, Aula>
 
         return new AulaResponse(
                 entidad.getId(),
+                entidad.getNombre(),
+                entidad.getCapacidad());
+    }
+
+    public DatosAula entidadADatosAula(Aula entidad) {
+        if(entidad == null) return null;
+
+        return new DatosAula(
                 entidad.getNombre(),
                 entidad.getCapacidad());
     }
