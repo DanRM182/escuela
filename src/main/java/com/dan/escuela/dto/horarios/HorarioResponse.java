@@ -1,6 +1,5 @@
 package com.dan.escuela.dto.horarios;
 
-
 import com.dan.escuela.dto.datos.DatosGrupo;
 import io.swagger.v3.oas.annotations.media.Schema;
 

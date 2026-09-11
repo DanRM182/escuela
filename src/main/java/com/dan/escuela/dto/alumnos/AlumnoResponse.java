@@ -14,7 +14,7 @@ public record AlumnoResponse(
     @Schema(description = "Nombre completo del alumno", example = "Máximo Décimo Meridio")
     String nombre,
 
-    @Schema(description = "Email del maestro", example = "test@test.com")
+    @Schema(description = "Email del alumno", example = "test@test.com")
     String email,
 
     @Schema(description = "Matricula del alumno", example = "643611515613")

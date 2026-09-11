@@ -1,10 +1,7 @@
 package com.dan.escuela.dto.grupos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 @Schema(description = "Datos necesarios para registrar/actualizar un grupo")
 public record GrupoRequest(
@@ -24,7 +21,10 @@ public record GrupoRequest(
         Long idAula,
 
         @NotBlank(message = "El periodo es requerido")
-        @Size(min = 1, max = 20, message = "El periodo debe tener entre 1 y 20 caracteres")
+        @Pattern(
+                regexp = "^2\\d{3}-(0[1-9]|1[0-2])$",
+                message = "El periodo debe tener el formato YYYY-MM"
+        )
         @Schema(description = "Periodo del grupo", example = "2026-01")
         String periodo
 ) { }

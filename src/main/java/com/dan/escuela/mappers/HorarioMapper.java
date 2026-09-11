@@ -34,7 +34,7 @@ public class HorarioMapper implements CommonMapper<HorarioRequest, HorarioRespon
 
     @Override
     public HorarioResponse entidadAResponse(Horario entidad) {
-        if(entidad == null || entidad.getGrupo() == null || entidad.getDiaSemana() == null)
+        if(entidad == null || entidad.getDiaSemana() == null)
             return null;
 
         DatosGrupo grupo = MapperUtils.entidadAObjetoDato(entidad, Horario::getGrupo, MapperUtils::entidadADatosGrupo);
