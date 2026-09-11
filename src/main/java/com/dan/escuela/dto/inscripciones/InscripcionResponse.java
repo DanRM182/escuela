@@ -17,9 +17,9 @@ public record InscripcionResponse(
         @Schema(description = "Datos del grupo al que se inscribió el alumno")
         DatosGrupo grupo,
 
-        @Schema(description = "Datos del grupo al que se inscribió el alumno")
+        @Schema(description = "Calificación del alumno")
         BigDecimal calificacion,
 
-        @Schema(description = "Datos del grupo al que se inscribió el alumno")
+        @Schema(description = "Fecha de inscripción del alumno")
         String fechaInscripcion
 ) { }

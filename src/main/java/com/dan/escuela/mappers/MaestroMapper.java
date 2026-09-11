@@ -32,7 +32,7 @@ public class MaestroMapper implements CommonMapper<MaestroRequest, MaestroRespon
     public MaestroResponse entidadAResponse(Maestro entidad) {
         if(entidad == null) return null;
 
-        List<DatosCurso> cursos = entidadADatosCurso(entidad);
+        List<DatosCurso> cursos = entidadADatosCursos(entidad);
 
         return new MaestroResponse(
                 entidad.getId(),
@@ -43,7 +43,7 @@ public class MaestroMapper implements CommonMapper<MaestroRequest, MaestroRespon
                 cursos);
     }
 
-    private List<DatosCurso> entidadADatosCurso(Maestro entidad) {
+    private List<DatosCurso> entidadADatosCursos(Maestro entidad) {
         return entidad != null ?
                 entidad.getGrupos().stream()
                     .map(Grupo::getCurso)

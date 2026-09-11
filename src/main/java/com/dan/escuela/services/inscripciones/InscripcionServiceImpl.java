@@ -42,7 +42,7 @@ public class InscripcionServiceImpl implements InscripcionService {
     @Override
     @Transactional(readOnly = true)
     public InscripcionResponse obtenerPorId(Long id) {
-        log.info("Buscando maestro por ID");
+        log.info("Buscando inscripción por ID");
 
         return inscripcionMapper.entidadAResponse(obtenerInscripcion(id));
     }

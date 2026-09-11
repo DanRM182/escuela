@@ -2,9 +2,11 @@ package com.dan.escuela.utils;
 
 import com.dan.escuela.dto.datos.DatosAlumno;
 import com.dan.escuela.dto.datos.DatosGrupo;
+import com.dan.escuela.dto.datos.DatosInscripcion;
 import com.dan.escuela.entities.Alumno;
 import com.dan.escuela.entities.Grupo;
 import com.dan.escuela.entities.Horario;
+import com.dan.escuela.entities.Inscripcion;
 
 import java.util.function.Function;
 
@@ -31,18 +33,5 @@ public class MapperUtils {
                                 entidad.getMaestro().getApellidoPaterno(), entidad.getMaestro().getApellidoMaterno()),
                         entidad.getAula().getNombre(),
                         entidad.getPeriodo()) : null;
-    }
-
-    public static DatosAlumno entidadADatosAlumno(Alumno entidad) {
-        return entidad != null ?
-                new DatosAlumno(
-                        entidad.obtenerNombreCompleto(
-                                entidad.getNombre(),
-                                entidad.getApellidoPaterno(),
-                                entidad.getApellidoMaterno()),
-                        entidad.getMatricula(),
-                        entidad.getEmail(),
-                        StringCustomUtils.localDateAString(
-                                entidad.getFechaIngreso())) : null;
     }
 }
