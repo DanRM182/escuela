@@ -44,7 +44,7 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
 
         DatosAula aula = MapperUtils.entidadAObjetoDato(entidad, Grupo::getAula, aulaMapper::entidadADatosAula);
 
-        List<String> horarios = entidadADatosHorario(entidad);
+        List<String> horarios = entidadADatosHorarios(entidad);
 
         return new GrupoResponse(
                 entidad.getId(),
@@ -56,9 +56,8 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
         );
     }
 
-    private List<String> entidadADatosHorario(Grupo entidad) {
+    private List<String> entidadADatosHorarios(Grupo entidad) {
         return entidad != null ? entidad.getHorarios().stream().
                 map(MapperUtils::entidadADatosHorario).toList() : List.of();
     }
-
 }

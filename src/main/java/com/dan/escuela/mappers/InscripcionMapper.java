@@ -2,6 +2,7 @@ package com.dan.escuela.mappers;
 
 import com.dan.escuela.dto.datos.DatosAlumno;
 import com.dan.escuela.dto.datos.DatosGrupo;
+import com.dan.escuela.dto.datos.DatosInscripcion;
 import com.dan.escuela.dto.inscripciones.InscripcionRequest;
 import com.dan.escuela.dto.inscripciones.InscripcionResponse;
 import com.dan.escuela.entities.Alumno;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class InscripcionMapper implements CommonMapper<InscripcionRequest, InscripcionResponse, Inscripcion> {
+    private final AlumnoMapper alumnoMapper;
+
     @Override
     public Inscripcion requestAEntidad(InscripcionRequest request) {
         return request != null ? Inscripcion.builder().build() : null;
@@ -37,7 +40,7 @@ public class InscripcionMapper implements CommonMapper<InscripcionRequest, Inscr
 
         DatosGrupo grupo = MapperUtils.entidadAObjetoDato(entidad, Inscripcion::getGrupo, MapperUtils::entidadADatosGrupo);
 
-        DatosAlumno alumno = MapperUtils.entidadAObjetoDato(entidad, Inscripcion::getAlumno, MapperUtils::entidadADatosAlumno);
+        DatosAlumno alumno = MapperUtils.entidadAObjetoDato(entidad, Inscripcion::getAlumno, alumnoMapper::entidadADatosAlumno);
 
         return new InscripcionResponse(
                 entidad.getId(),
@@ -47,5 +50,13 @@ public class InscripcionMapper implements CommonMapper<InscripcionRequest, Inscr
                         entidad.getCalificacion().getCalificacion() : null,
                 StringCustomUtils.localDateAString(
                         entidad.getFechaInscripcion()));
+    }
+    public DatosInscripcion entidadADatosInscripcion(Inscripcion entidad) {
+        return entidad != null ?
+                new DatosInscripcion(
+                        MapperUtils.entidadAObjetoDato(entidad, Inscripcion::getAlumno, alumnoMapper::entidadADatosAlumno),
+                        MapperUtils.entidadAObjetoDato(entidad, Inscripcion::getGrupo, MapperUtils::entidadADatosGrupo),
+                        StringCustomUtils.localDateAString(
+                                entidad.getFechaInscripcion())) : null;
     }
 }

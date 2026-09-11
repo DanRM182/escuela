@@ -2,6 +2,7 @@ package com.dan.escuela.mappers;
 
 import com.dan.escuela.dto.alumnos.AlumnoRequest;
 import com.dan.escuela.dto.alumnos.AlumnoResponse;
+import com.dan.escuela.dto.datos.DatosAlumno;
 import com.dan.escuela.dto.datos.DatosCalificacion;
 import com.dan.escuela.entities.Alumno;
 import com.dan.escuela.utils.StringCustomUtils;
@@ -38,7 +39,7 @@ public class AlumnoMapper implements CommonMapper<AlumnoRequest, AlumnoResponse,
     public AlumnoResponse entidadAResponse(Alumno entidad) {
         if(entidad == null) return null;
 
-        List<DatosCalificacion> calificaciones = entidadDatosACalificacion(entidad);
+        List<DatosCalificacion> calificaciones = entidadDatosACalificaciones(entidad);
 
         return new AlumnoResponse(
                 entidad.getId(),
@@ -54,7 +55,20 @@ public class AlumnoMapper implements CommonMapper<AlumnoRequest, AlumnoResponse,
                 entidad.calcularPromedio());
     }
 
-    private List<DatosCalificacion> entidadDatosACalificacion(Alumno entidad) {
+    public DatosAlumno entidadADatosAlumno(Alumno entidad) {
+        return entidad != null ?
+                new DatosAlumno(
+                        entidad.obtenerNombreCompleto(
+                                entidad.getNombre(),
+                                entidad.getApellidoPaterno(),
+                                entidad.getApellidoMaterno()),
+                        entidad.getMatricula(),
+                        entidad.getEmail(),
+                        StringCustomUtils.localDateAString(
+                                entidad.getFechaIngreso())) : null;
+    }
+
+    private List<DatosCalificacion> entidadDatosACalificaciones(Alumno entidad) {
         if(entidad == null || entidad.getInscripciones() == null || entidad.getInscripciones().isEmpty())
             return List.of();
 

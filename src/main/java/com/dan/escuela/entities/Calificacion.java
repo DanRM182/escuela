@@ -30,4 +30,12 @@ public class Calificacion {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_INSCRIPCION", nullable = false, unique = true)
     private Inscripcion inscripcion;
+
+    public void asignarInscripcion(Inscripcion inscripcion) {
+        this.inscripcion = inscripcion;
+    }
+
+    public void asignarNuevaCalificacion(BigDecimal calificacion) {
+        this.calificacion = calificacion;
+    }
 }
